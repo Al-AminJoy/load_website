@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Al-Amin Islam Joy'),
+          title: Text('Suffix IT Limited'),
         ),
         bottomNavigationBar: Container(
           color: Theme.of(context).accentColor,
@@ -72,8 +72,10 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         body: WebView(
-          initialUrl: "https://alaminjoy.wordpress.com/",
+          initialUrl: "https://suffixit.com/",
           onWebViewCreated: (controller)=> _controller.complete(controller),
+          javascriptMode: JavascriptMode.unrestricted,
+
         ),
       ),
     );
