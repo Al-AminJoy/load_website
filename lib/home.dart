@@ -11,35 +11,48 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
 
+class _HomePageState extends State<HomePage> {
   late WebViewController controller;
+
+  bool isLoading=true;
+
+  var currentStatus;
+
+
+  @override
+  void initState() {
+    setState(() {
+      isLoading = true;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 0,
-          ),
-          body: WillPopScope(
+    return Scaffold(
+      appBar: new AppBar(
+        toolbarHeight: 0,
+      ),
+      body: Stack(
+        children: <Widget>[
+          WillPopScope(
             onWillPop: () => _exitApp(context),
             child: WebView(
               initialUrl: "https://suffixit.com/",
-              onWebViewCreated: (WebViewController webViewController) {
-                controller = webViewController;
-              },
               javascriptMode: JavascriptMode.unrestricted,
-              onPageFinished: (String url) async {
-                print("Loading Finished");
-
-              },
-
-              onPageStarted: (String url) async {
-                print("Loading Start");
+              onPageFinished: (finish) {
+                setState(() {
+                  isLoading = false;
+                });
               },
             ),
-          )
-      );
+          ),
+          isLoading ? Center(child: CircularProgressIndicator(),)
+              : Stack(),
+        ],
+      ),
+    );
   }
 
 
@@ -51,5 +64,6 @@ class _HomePageState extends State<HomePage> {
       return Future.value(true);
     }
   }
+
 
 }
