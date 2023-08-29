@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       isLoading = true;
     });
+    log("BACKPRESS INIT");
+
     super.initState();
   }
 
@@ -58,10 +60,14 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _exitApp(BuildContext context) async {
     if (await controller.canGoBack()) {
+      log("BACKPRESS BACK");
       controller.goBack();
-      return Future.value(false);
-    } else {
       return Future.value(true);
+    } else {
+      log("BACKPRESS NOt BACK");
+
+      return Future.value(true);
+
     }
   }
 
