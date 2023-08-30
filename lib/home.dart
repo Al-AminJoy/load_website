@@ -42,6 +42,9 @@ class _HomePageState extends State<HomePage> {
             onWillPop: () => _exitApp(context),
             child: WebView(
               initialUrl: "https://suffixit.com/",
+              onWebViewCreated: (WebViewController webViewController) {
+                controller = webViewController;
+              },
               javascriptMode: JavascriptMode.unrestricted,
               onPageFinished: (finish) {
                 setState(() {
@@ -60,12 +63,9 @@ class _HomePageState extends State<HomePage> {
 
   Future<bool> _exitApp(BuildContext context) async {
     if (await controller.canGoBack()) {
-      log("BACKPRESS BACK");
       controller.goBack();
-      return Future.value(true);
+      return Future.value(false);
     } else {
-      log("BACKPRESS NOt BACK");
-
       return Future.value(true);
 
     }

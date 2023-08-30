@@ -16,10 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    print("initial");
     Timer(Duration(seconds: 5),(){
-      print("initial after");
-
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage()));
     });
   }
