@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,15 +26,23 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       isLoading = true;
     });
-    log("BACKPRESS INIT");
 
     super.initState();
   }
+
+
+  String hexString = "002C5F";
+  //var hexColor = Color(int.parse("0x002C5F}"));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Color(0xFF002c5f),
+          statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
         toolbarHeight: 0,
       ),
       body: Stack(
@@ -41,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           WillPopScope(
             onWillPop: () => _exitApp(context),
             child: WebView(
-              initialUrl: "https://suffixit.com/",
+              initialUrl: "https://www.hyundai.com/worldwide/en/vehicles",
               onWebViewCreated: (WebViewController webViewController) {
                 controller = webViewController;
               },
@@ -53,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
-          isLoading ? Center(child: CircularProgressIndicator(),)
+          isLoading ? Center(child: CircularProgressIndicator(color:Color(0xFF002c5f) ,),)
               : Stack(),
         ],
       ),

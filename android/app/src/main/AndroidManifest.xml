@@ -2,7 +2,7 @@
     package="com.alamin.load_website">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="load_website"
+        android:label="Hyundai"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
